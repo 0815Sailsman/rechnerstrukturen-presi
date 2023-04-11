@@ -12,6 +12,7 @@
 
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+		<link rel="stylesheet" href="dist/custom.css">
 	</head>
 	<body>
 		<div class="reveal">
@@ -54,9 +55,12 @@
 				<section>
 					<section>
 						<h1>Series 1</h1>
+						<span>Cycling a bit through r7 and syncing the rgb led to it</span>
 					</section>
+				</section>
+				<section>
 					<section>
-						<h2>Before you start you should know <em>at least</em>:</h2>
+						<h2>Before you start:</h2>
 						<ul>
 							<li>Binary and hex basics (TGI)</li>
 							<li>The basics of our registers</li>
@@ -79,23 +83,58 @@
 						<a href="https://www.khanacademy.org/computing/computers-and-internet/xcae6f4a7ff015e7d:digital-information/xcae6f4a7ff015e7d:hexadecimal-numbers/a/hexadecimal-numbers">Hex explained</a>
 					</section>
 					<section>
-						<h2>Damn registers</h2>
-						What are registers and why are they important.
+						<h2>How data is organized</h2>
+						<div class="horizontal">
+						<div class="list">
+							<span style="font-size:32px">Data (lets say Bytes)</span>
+							<div class="box">0</div>
+							<div class="box">255</div>
+							<div class="box">42</div>
+							...
+							<div class="box">123</div>
+						</div>
+						<div class="list">
+							<span style="font-size:32px">Address (here dec. often hex.)</span>
+							<div class="box">0</div>
+							<div class="box">1</div>
+							<div class="box">2</div>
+							...
+							<div class="box">4,294,967,295</div>
+						</div>
+						</div>
 					</section>
 					<section>
-						<h2>How data is organized</h2>
-						<aside>An anectode to understand memory addresses</aside>
-						Go from storage level up to register layer
-						Every register has x
+						<h3>Hardware Mapping</h3>
+						<p>
+						The important point for us is, that specific areas in memory have designated meaning.<br>
+							As an example, the data stored behind address 0x12345678 might always be used by the
+							processor to determine the brightness of the built in LED.<br>
+							So, writing values to it has a direct effect on the system.<br>
+							That is how you get stuff done on this level:<br>
+							By writing the correct value to the correct place!
+						</p>
 					</section>
 					<section>
 						<h2><em>OUR</em> assembly workflow</h2>
-						you load store add stuff
-						where do you work with this stuff? ->
+						<ol>
+							<li>Break the task down to a pseudocode like level</li>
+							<li>Find out where in memory the current action takes place (datasheet)</li>
+							<li>Check what data you need to change in what way (datasheet)</li>
+							<li>Actually code it. Load the data, change it and store it again(arm thumb docs)</li>
+						</ol>
+						<aside style="margin-top:50px">
+							Only step 4 is actually writing code. The rest is digging through datasheets and documentation.
+						</aside>
 					</section>
 					<section>
-						<h2>to the general purpose registers (mainly)</h2>
-						what are they, how many and flags and stuff
+						<h2>Genereal Purpose Registers</h2>
+						<aside>How to actually work with data</aside>
+						<img src="register.png" style="height:25vh">
+						<ul>
+							<li>Load your data to these</li>
+							<li>Flags are set onto them with stuff like CMP</li>
+							<li>Comparable to high level variables</li>
+						</ul>
 					</section>
 				</section>
 			</div>
