@@ -136,6 +136,43 @@
 							<li>Comparable to high level variables</li>
 						</ul>
 					</section>
+					<section>
+						<h2>Manuals and documentation</h2>
+						As you might have noticed by now, all datasheets and documentation is provided to us in the moodle task.<br>
+						For the sake of completeness, here they are again though:<br>
+						<a href="proc-datasheet.pdf" download>CPU Datasheet</a><br>
+						<a href="board-datasheet.pdf" download>Board Datasheet</a><br>
+						<a href="https://developer.arm.com/documentation/dui0473/m/arm-and-thumb-instructions/arm-and-thumb-instruction-summary?lang=en">Aseembly Documentation</a>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h1>Approaching the task</h1>
+					</section>
+					<section>
+						<h2>Get the led working by itself</h2>
+						<ul>
+							<li>Onboard LED is connected to GPIO Pins so check out how to set them up properly (Datasheet, mostly chapter 10)</li>
+							<li>Check the board datasheet to see what pin they are connected to exactly</li>
+							<li>Try to just turn on the LED in a specific color</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Try to get the button to work</h2>
+						<ul>
+							<li>The button is also hooked up the GPIO Pins but needs some extra work compared to the LED. Set it up.</li>
+							<li>The datasheet specifies where in memory you can see if a button is pressed or not. Find out where.</li>
+							<li>With everything setup, try to turn on the LED only when the button is pressed</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Shift value trough r7 periodically</h2>
+						<ul>
+							<li>Try to build a 500ms timer. You can just count up in some register every cycle and approximate when 500ms are reached. Then, do something observable, like toggle the LED-Color and reset the counter.</li>
+							<li>Now, instead of just switching the LED, you can try to branch of into a subroutine to make your code more readable.</li>
+							<li>Now, you can build a subroutine in which you use the left shift operation on r7. Add some logic to handle the "overflow"</li>
+						</ul>
+					</section>
 				</section>
 			</div>
 		</div>
