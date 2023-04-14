@@ -129,12 +129,20 @@
 					<section>
 						<h2>Genereal Purpose Registers</h2>
 						<aside>How to actually work with data</aside>
-						<img src="register.png" style="height:25vh">
-						<ul>
-							<li>Load your data to these</li>
-							<li>Flags are set onto them with stuff like CMP</li>
-							<li>Comparable to high level variables</li>
-						</ul>
+						<p>
+						You have a few registers where you can freely do stuff (mostly r0 ... r7)<br>
+						They have 32 bits of data each available<br>
+						Working with specific commands on them might set flags. These are internally stored in the program state register automatically.
+						</p>
+					</section>
+					<section style="font-size:30px">
+						<h1>Sample code</h1>
+						LDR r0 =<i>some .equ constant</i>	Loads the stored constant into r0<br>
+						LDR r1, [r0] 				Interprets r0 as an address and loads the data behind it into r1<br>
+						MOV r3, #<i>some small, I think 16 bit, .equ constant</i> 	I think same as r1 but for smaller values...<br>
+						ORR r1, r1, r3			Logical or between r1 and r3 and store into r1
+						STR r1, [r0]			Store the content of r1 to the adress that is stored in r0<br><br>
+						<h3>ALL OF THIS CAN BE FOUND ON THE CHEATSHEET AND IN THE DOCS - BUT BETTER</h3>
 					</section>
 					<section>
 						<h2>Manuals and documentation</h2>
@@ -166,12 +174,40 @@
 						</ul>
 					</section>
 					<section>
-						<h2>Shift value trough r7 periodically</h2>
+						<h2>Build a timer</h2>
 						<ul>
-							<li>Try to build a 500ms timer. You can just count up in some register every cycle and approximate when 500ms are reached. Then, do something observable, like toggle the LED-Color and reset the counter.</li>
-							<li>Now, instead of just switching the LED, you can try to branch of into a subroutine to make your code more readable.</li>
-							<li>Now, you can build a subroutine in which you use the left shift operation on r7. Add some logic to handle the "overflow"</li>
+							<li>Try to build a 500ms timer. You can just count up in some register every cycle and approximate when 500ms are reached.</li>
+							<li>Then, do something observable, like toggle the LED-Color when the counter is reached and reset it</li>
 						</ul>
+					</section>
+					<section>
+						<h2>Organize into branches with subroutines</h2>
+						<ul>
+
+							<li>Now, instead of just switching the LED, you can try to branch of into a subroutine to make your code more readable.</li>
+							<li>Idead would be to make subroutines for the timer, the action when it is reached, the resetting of it and much more...</li>
+						</ul>
+					</section>
+					<section style="font-size:30px">
+						<h2>Adding shifting</h2>
+						<aside>You should now be able to read the button press, use LEDs and all that organized</aside>
+						The shifting part is relatively easy compared to the previous stuff, as there are direct Instructions for that.<br>
+						Try to code it so, that when your timer reaches its count, you also shift left in r7.<br>
+						But when the button is pressed, you instead branch of before and shift to the right.<br>
+						You could also directly add the matching LED colors. Just remember to turn off the unneeded one aswell!
+					</section>
+					<section>
+						<h2>But theres more!</h2>
+						<aside>You need to handle the shifting outside of the register</aside>
+						<p>
+						Just check after every shift if there has be an "overflow" / "underflow".<br>
+						Ideally you have 2 separare branches, one for right shift one for left.<br>
+						So you check in each for the outside shift and can react accordingly!
+						</p>
+					</section>
+					<section>
+						<h2>Thats it</h2>
+						If everything went according to plan you should be done now! :)
 					</section>
 				</section>
 			</div>
